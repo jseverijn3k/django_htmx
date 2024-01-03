@@ -1,3 +1,5 @@
+{% load static %}
+
 <aside x-show="mobileSidebarOpen" x-cloak class="md:!block col-span-full md:col-span-1 lg:mr-[20%] order-1 md:order-2"
     x-transition:enter="duration-300 ease-out"
     x-transition:enter-start="opacity-0 -mt-96"
@@ -42,7 +44,7 @@
         </section>
         <section class="card p-4">
             <div class="flex items-center">
-                <img class="w-7 mr-2 -mt-3" src="https://img.icons8.com/ios-glyphs/90/null/fire-heart.png"/>
+                <img class="w-6 mr-2 -mt-3" src="{% static 'images/fireheart_black.svg' %}"/>
                 <h2>Top Posts</h2>
             </div>
             <ul class="hoverlist">
@@ -70,7 +72,7 @@
         </section>
         <section class="card p-4">
             <div class="flex items-center">
-                <img class="w-7 mr-2 -mt-3" src="https://img.icons8.com/ios-glyphs/90/null/fire-heart.png"/>
+                <img class="w-6 mr-2 -mt-3" src="{% static 'images/fireheart_black.svg' %}"/>
                 <h2>Top Comments</h2>
             </div>
             <ul class="hoverlist">

@@ -10,6 +10,7 @@ The project includes:
   * using a many-to-many relationship between post and tags
   * category filtering -> showing only the posts belonging to a certain category
   * use category images
+  * enable a category order
 * etc...
 
 
