@@ -4,7 +4,7 @@
         <div class="text-sm text-gray-400 truncate">flickr<a href="{{post.url}}" class="hover:underline ml-1" target="blank">@{{post.artist}}</a></div>
     </div>
     <figure>
-        <a href=""><img class="w-full" src="{{ post.image }}"></a>
+        <a href="{% url 'post-page' post.id %}"><img class="w-full" src="{{ post.image }}"></a>
     </figure>
     <div class="p-4 pb-2">
         <a class="flex items-center gap-1 mb-4" href="">

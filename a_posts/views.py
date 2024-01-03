@@ -1,14 +1,13 @@
 from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import PostCreateForm, PostEditForm
 from .models import Post
 
-
 from bs4 import BeautifulSoup
 import requests
 
-# Create your views here.
+
 def home_view(request, *args, **kwargs):
     print(request.user)
     context = {
@@ -49,7 +48,7 @@ def post_create_view(request, *args, **kwargs):
     return render(request, "a_posts/post_create.html", {'form' : form})
 
 def post_delete_view(request, pk):
-    post = Post.objects.get(id=pk)
+    post = get_object_or_404(Post, id=pk)
 
     if request.method == 'POST':
         post.delete()
@@ -60,7 +59,7 @@ def post_delete_view(request, pk):
 
 
 def post_edit_view(request, pk):
-    post = Post.objects.get(id=pk)
+    post = get_object_or_404(Post, id=pk)
     form = PostEditForm(instance=post)
 
     context = {
@@ -78,3 +77,11 @@ def post_edit_view(request, pk):
     
     return render(request, "a_posts/post_edit.html", context)
 
+def post_page_view(request, pk):
+    post = get_object_or_404(Post, id=pk)
+
+    context = {
+        'post' : post,
+    }
+    
+    return render(request, "a_posts/post_page.html", context)
