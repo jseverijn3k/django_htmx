@@ -10,35 +10,10 @@
                 {% for category in categories %}
                 <li class="{% if category.slug == tag.slug %} highlight {% endif %}">
                     <a href="{% url 'category' category.slug %}">
-                        <img class="w-8 h-8 object-cover mr-2" src="https://img.icons8.com/small/96/null/landscape.png">
+                        <img class="w-8 h-8 object-cover mr-2" src="{{ category.image.url    }}">
                         <span class="font-bold text-sm">{{category.name}}</span>
                     </a>
                 </li>
-                {% comment %} <li>
-                <li class="highlight">
-                    <a href="{% url 'category' 'landscape' }">
-                        <img class="w-8 h-8 object-cover mr-2" src="https://img.icons8.com/small/96/null/landscape.png">
-                        <span class="font-bold text-sm">Landscape</span>
-                    </a>
-                </li>
-
-                    <a href="">
-                        <img class="w-8 h-8 object-cover mr-2" src="https://img.icons8.com/small/96/null/portrait.png">
-                        <span class="font-bold text-sm">People</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img class="w-8 h-8 object-cover mr-2" src="https://img.icons8.com/small/96/null/dog.png">
-                        <span class="font-bold text-sm">Animals</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <img class="w-8 h-8 object-cover mr-2" src="https://img.icons8.com/small/96/null/180-degrees.png">
-                        <span class="font-bold text-sm">Black & White</span>
-                    </a>
-                </li> {% endcomment %}
                 {% endfor %}
             </ul>
         </section>
