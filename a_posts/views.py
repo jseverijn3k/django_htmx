@@ -2,20 +2,26 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import PostCreateForm, PostEditForm
-from .models import Post
+from .models import Post, Tag
 
 from bs4 import BeautifulSoup
 import requests
 
 
-def home_view(request, *args, **kwargs):
-    print(request.user)
+def home_view(request, tag=None):
+    if tag:
+        posts = Post.objects.filter(tags__slug=tag)
+        tag = get_object_or_404(Tag, slug=tag)
+    else:     
+        posts=  Post.objects.all()
+    
     context = {
-        'posts' : Post.objects.all()
+        'posts' : posts,
+        'categories' : Tag.objects.all(),
+        'tag' : tag,
     }
 
     return render(request, "a_posts/home.html", context)
-
  
 
 def post_create_view(request, *args, **kwargs):
@@ -42,6 +48,7 @@ def post_create_view(request, *args, **kwargs):
             post.artist = artist
 
             post.save()
+            form.save_m2m() # save our tags m2m field
             return redirect('home')
         
     form = PostCreateForm()
