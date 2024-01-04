@@ -20,11 +20,13 @@ from django.contrib import admin
 from django.urls import path, include
 
 from a_posts.views import *
+from a_users.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
 
+    # a_posts urls
     path('', home_view, name='home'),
     path('post/<pk>', post_page_view, name='post-page'),
     path('post/create/', post_create_view, name='post-create'),
@@ -32,7 +34,9 @@ urlpatterns = [
     path('post/edit/<pk>', post_edit_view, name='post-edit'),
     path('category/<tag>', home_view, name='category'),
 
-
+    # a_users urls
+    path('profile', profile_view, name='profile'),
+    
     ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

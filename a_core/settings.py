@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     # Myapps
     'a_posts',
+    'a_users',
 ]
 
 MIDDLEWARE = [
@@ -155,5 +156,7 @@ LOGIN_REDIRECT_URL = '/'
 
 # TEMPORARY EMAIL BACKEND -> for testing allauth locally
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Choose to have users verify their email addresses or not
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
