@@ -19,8 +19,10 @@ The project includes:
   * password reset
   * email verification after a signup
   * styling of all allauth templates
-* User profiles
-  * with profile pictures
+* User profiles -> in a seperate django app
+  * one-to-one connection with the standard django user model
+  * profile pictures -> using Pillow package
+
 * etc...
 
 
