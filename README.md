@@ -18,6 +18,7 @@ The project includes:
   * signup
   * password reset
   * email verification after a signup
+  * styling of all allauth templates
 * User profiles
   * with profile pictures
 * etc...

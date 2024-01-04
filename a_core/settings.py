@@ -150,3 +150,10 @@ AUTHENTICATION_BACKENDS = [
     # allauth specific authentication methods, such as login by email
     'allauth.account.auth_backends.AuthenticationBackend',
 ]
+
+LOGIN_REDIRECT_URL = '/'
+
+# TEMPORARY EMAIL BACKEND -> for testing allauth locally
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_EMAIL_REQUIRED = True
