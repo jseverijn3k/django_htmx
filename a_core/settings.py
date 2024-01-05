@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # ... include the providers you want to enable:
     # 'allauth.socialaccount.providers.google',
 
+    'django_cleanup.apps.CleanupConfig',
 
     # Myapps
     'a_posts',
