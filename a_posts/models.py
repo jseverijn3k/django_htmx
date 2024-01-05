@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 import uuid
 
@@ -7,6 +8,7 @@ class Post(models.Model):
     artist = models.CharField(max_length=500, null=True)
     url = models.URLField(max_length=500, null=True)   
     image = models.URLField(max_length=500) 
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='posts')
     body = models.TextField()
     tags = models.ManyToManyField('Tag', blank=True)
     created = models.DateTimeField(auto_now_add=True)
