@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.templatetags.static import static
 
 
 class Profile(models.Model):
@@ -13,3 +14,23 @@ class Profile(models.Model):
 
     def __str__(self):
         return str(self.user)
+    
+    @property
+    # check if there is an image, if not, return default avatar
+    def avatar(self):
+        try: 
+            avatar = self.image.url
+        except:
+            avatar = static('images/avatar_default.svg')
+        return avatar
+
+    @property
+    # check if there is a realname, if not, return username
+    def name(self):
+        if self.realname:
+            name = self.realname
+            print(f"realname: {name}")
+        else:
+            name = self.user.username
+        return name
+

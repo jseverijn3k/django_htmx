@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+
 import uuid
 
 # Create your models here.
@@ -19,7 +20,6 @@ class Post(models.Model):
     
     class Meta:
         ordering = ['-created']
-
 
     
 class Tag(models.Model):

@@ -161,3 +161,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Choose to have users verify their email addresses or not
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
+
+ACCOUNT_USERNNAME_BLACKLIST = ['admin', 'superuser', 'administrator', 'root', 'sysadmin', 'system', 'accounts', 'profile', 'category', 'post']
