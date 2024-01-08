@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import PostCreateForm, PostEditForm, CommentCreateForm, ReplyCreateForm
-from .models import Post, Tag, Comment
+from .models import Post, Tag, Comment, Reply
 
 from bs4 import BeautifulSoup
 import requests
@@ -152,3 +152,15 @@ def reply_sent(request, pk):
 
     return redirect('post-page', comment.parent_post.id)
             
+
+@login_required
+def reply_delete_view(request, pk):
+    reply = get_object_or_404(Reply, id=pk, author=request.user)
+
+    if request.method == 'POST':
+        reply.delete()
+        messages.success(request, 'Reply deleted successfully')  
+        return redirect('post-page', reply.parent_comment.parent_post.id)
+    
+    return render(request, "a_posts/reply_delete.html", {'reply' : reply})
+
