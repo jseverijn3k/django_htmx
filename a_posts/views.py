@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
 from .forms import PostCreateForm, PostEditForm, CommentsCreateForm
-from .models import Post, Tag
+from .models import Post, Tag, Comment
 
 from bs4 import BeautifulSoup
 import requests
@@ -122,3 +122,14 @@ def comment_sent(request, pk):
 
     return redirect('post-page', post.id)
             
+
+@login_required
+def comment_delete_view(request, pk):
+    comment = get_object_or_404(Comment, id=pk, author=request.user)
+
+    if request.method == 'POST':
+        comment.delete()
+        messages.success(request, 'Comment deleted successfully')  
+        return redirect('post-page', comment.parent_post.id)
+    
+    return render(request, "a_posts/comment_delete.html", {'comment' : comment})
