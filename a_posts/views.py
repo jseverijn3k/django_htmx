@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import PostCreateForm, PostEditForm, CommentsCreateForm
+from .forms import PostCreateForm, PostEditForm, CommentCreateForm, ReplyCreateForm
 from .models import Post, Tag, Comment
 
 from bs4 import BeautifulSoup
@@ -95,14 +95,17 @@ def post_edit_view(request, pk):
 def post_page_view(request, pk):
     post = get_object_or_404(Post, id=pk)
 
-    commentform = CommentsCreateForm()
+    commentform = CommentCreateForm()
+    replyform = ReplyCreateForm()
     
     context = {
         'post' : post,
         'commentform' : commentform,
+        'replyform' : replyform,
     }
     
     return render(request, "a_posts/post_page.html", context)
+
 
 @login_required
 def comment_sent(request, pk):
@@ -113,7 +116,7 @@ def comment_sent(request, pk):
     print(f"Post : {post}")
 
     if request.method == 'POST':
-        form = CommentsCreateForm(request.POST)
+        form = CommentCreateForm(request.POST)
         if form.is_valid:
             comment = form.save(commit=False)
             comment.author = request.user
@@ -133,3 +136,19 @@ def comment_delete_view(request, pk):
         return redirect('post-page', comment.parent_post.id)
     
     return render(request, "a_posts/comment_delete.html", {'comment' : comment})
+
+
+@login_required
+def reply_sent(request, pk):
+    comment = get_object_or_404(Comment, id=pk)
+
+    if request.method == 'POST':
+        form = ReplyCreateForm(request.POST)
+        if form.is_valid:
+            reply = form.save(commit=False)
+            reply.author = request.user
+            reply.parent_comment = comment
+            reply.save()
+
+    return redirect('post-page', comment.parent_post.id)
+            
