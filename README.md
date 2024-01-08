@@ -1,6 +1,10 @@
 # Simple webapp to see howfar we can stretch django and htmx before we need JavaScript.
 
-The whole gist of teh project is to have stream where you can post your favourite Flickr (www.flickr.com) images.
+The whole idea of this project is to build an **Instagram** like webapp 
+* where you can post a Flickr (www.flickr.com) image -> using a Flickr link after which a webcrawler fetches the imeage an image info from Flickr.
+* see a stream (on a screen) with the latest posts
+* you can comment apost and reply on a comment
+* you can like posts, comments and replies
 
 The project includes:
 
