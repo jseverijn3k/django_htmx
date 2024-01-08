@@ -34,6 +34,7 @@ urlpatterns = [
     path('post/edit/<pk>', post_edit_view, name='post-edit'),
     path('category/<tag>', home_view, name='category'),
     path('commentsent/<pk>', comment_sent, name='comment-sent'),
+    path('comment/delete/<pk>', comment_delete_view, name='comment-delete'),
 
     # a_users urls
     path('profile', profile_view, name='profile'),
