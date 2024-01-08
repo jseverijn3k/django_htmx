@@ -44,4 +44,11 @@ class Comment(models.Model):
 
 
     def __str__(self):
-        return f'{self.author.username} : {self.body[:30]}'
+        try:
+            return f'{self.author.username} : {self.body[:30]}'
+        except:
+            return f'unknown author : {self.body[:30]}'
+        
+    class Meta:
+        ordering = ['-created']
+

@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 
-from .forms import PostCreateForm, PostEditForm
+from .forms import PostCreateForm, PostEditForm, CommentsCreateForm
 from .models import Post, Tag
 
 from bs4 import BeautifulSoup
@@ -95,8 +95,30 @@ def post_edit_view(request, pk):
 def post_page_view(request, pk):
     post = get_object_or_404(Post, id=pk)
 
+    commentform = CommentsCreateForm()
+    
     context = {
         'post' : post,
+        'commentform' : commentform,
     }
     
     return render(request, "a_posts/post_page.html", context)
+
+@login_required
+def comment_sent(request, pk):
+    print(request)
+    print(f"pk : {pk}")
+
+    post = get_object_or_404(Post, id=pk)
+    print(f"Post : {post}")
+
+    if request.method == 'POST':
+        form = CommentsCreateForm(request.POST)
+        if form.is_valid:
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.parent_post = post
+            comment.save()
+
+    return redirect('post-page', post.id)
+            
