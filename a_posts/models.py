@@ -40,7 +40,7 @@ class Comment(models.Model):
     parent_post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     body = models.CharField(max_length=150)
     created = models.DateTimeField(auto_now_add=True)
-    id = models.CharField(max_length=100, default=uuid.uuid4, editable=False, unique=True)
+    id = models.CharField(max_length=100, default=uuid.uuid4, primary_key=True, editable=False, unique=True)
 
 
     def __str__(self):
