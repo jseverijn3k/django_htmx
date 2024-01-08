@@ -14,7 +14,10 @@ The project includes:
 * use the BeautifulSoup package to build the webcrawler
 
 # Messages (using Django messages) 
-* to show if an action for example (Create / Update / Delete of a post) was succesfull
+* to show if an action was succesfull
+  * Create / Update / Delete of a post
+  * Delete of a comment
+  * Delete of a reply
 
 # Categories and Tag -> in Post app
 * to tag our posts with a certain category 
