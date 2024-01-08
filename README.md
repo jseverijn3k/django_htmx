@@ -4,19 +4,19 @@ The whole gist of teh project is to have stream where you can post your favourit
 
 The project includes:
 
-# Posts
+# Posts -> in a seperate djamngo app
 * Post information like image, author, etc..
 * default avatars if no author is known (e.g. when a user leaves his posts are not deleted)
 * CRUD functionality to view, create update and delete a post (using Django Forms) 
 
-# A webcrawler to get images from Flickr.com
+# A webcrawler to get images from Flickr.com -> as part of post functionality
 * get images, artist name and artist url from Flickr
 * use the BeautifulSoup package to build the webcrawler
 
 # Messages (using Django messages) 
 * to show if an action for example (Create / Update / Delete of a post) was succesfull
 
-# Categories and Tag
+# Categories and Tag -> in Post app
 * to tag our posts with a certain category 
 * using a many-to-many relationship between post and tags
 * category filtering -> showing only the posts belonging to a certain category
@@ -42,8 +42,12 @@ The project includes:
 * use Django signals to update the user table when the email is changed on the profile page
 * use a Django onboarding page that is shown directly after a user signsup
 
-# Comments and replies
-  
-* etc...
+# Comments and replies -> in Post app
+* Comments model -> with create, read and delete (only own comments) functionality
+* Replies (to comments) model -> with create, read and delete (only own replies) functionality
+* show author next to comments and replies
+
+# Likes
+* use HTMX
 
 
