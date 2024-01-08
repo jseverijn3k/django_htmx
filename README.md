@@ -6,8 +6,8 @@ The project includes:
 
 # Posts -> in a seperate djamngo app
 * Post information like image, author, etc..
-* default avatars if no author is known (e.g. when a user leaves his posts are not deleted)
-* CRUD functionality to view, create update and delete a post (using Django Forms) 
+* default avatars if no author is known (e.g. when a user leaves (deletes his profile). The posts are not deleted but the author is shown as 'no author'.
+* CRUD functionality to view, create update and delete a post (using Django Forms).
 
 # A webcrawler to get images from Flickr.com -> as part of post functionality
 * get images, artist name and artist url from Flickr
@@ -46,9 +46,11 @@ The project includes:
 * use a Django onboarding page that is shown directly after a user signsup
 
 # Comments and replies -> in Post app
-* Comments model -> with create, read and delete (only own comments) functionality
+* Comments model -> with create, read and delete (only own comments) functionality.
+  * for the create Django Forms is used
 * Replies (to comments) model -> with create, read and delete (only own replies) functionality
-* show author next to comments and replies
+  * for the create Django Forms is used
+* show author next to comments and replies -> and linkl to the user profile
 
 # Likes
 * use HTMX
