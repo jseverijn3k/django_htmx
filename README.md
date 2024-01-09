@@ -1,9 +1,9 @@
 # Simple webapp to see howfar we can stretch django and htmx before we need JavaScript.
 
 The whole idea of this project is to build an **Instagram** like webapp 
-* where you can post a Flickr (www.flickr.com) image -> using a Flickr link after which a webcrawler fetches the imeage an image info from Flickr.
+* where you can post a Flickr (www.flickr.com) image -> using a Flickr link after which a webcrawler fetches the image and image info from Flickr.
 * see a stream (on a screen) with the latest posts
-* you can comment apost and reply on a comment
+* you can comment acpost and reply on a comment
 * you can like posts, comments and replies
 
 The project includes:
@@ -57,6 +57,6 @@ The project includes:
 * show author next to comments and replies -> and linkl to the user profile
 
 # Likes
-* use HTMX
+* use HTMX -> Key concepts: Through tables, hx-get, hx-target, hx-swap, snippets
 
 
