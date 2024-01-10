@@ -29,6 +29,7 @@ urlpatterns = [
     # a_posts urls
     path('', home_view, name='home'),
     path('post/<pk>', post_page_view, name='post-page'),
+    path('post/<pk>/like', like_post, name='like-post'),
     path('post/create/', post_create_view, name='post-create'),
     path('post/delete/<pk>', post_delete_view, name='post-delete'),
     path('post/edit/<pk>', post_edit_view, name='post-edit'),
@@ -37,6 +38,8 @@ urlpatterns = [
     path('comment/delete/<pk>', comment_delete_view, name='comment-delete'),
     path('replysent/<pk>', reply_sent, name='reply-sent'),
     path('reply/delete/<pk>', reply_delete_view, name='reply-delete'),
+    
+    
 
     # a_users urls
     path('profile', profile_view, name='profile'),
