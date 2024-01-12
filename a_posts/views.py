@@ -110,11 +110,8 @@ def post_page_view(request, pk):
 
 @login_required
 def comment_sent(request, pk):
-    print(request)
-    print(f"pk : {pk}")
-
     post = get_object_or_404(Post, id=pk)
-    print(f"Post : {post}")
+    replyform = ReplyCreateForm()
 
     if request.method == 'POST':
         form = CommentCreateForm(request.POST)
@@ -124,7 +121,13 @@ def comment_sent(request, pk):
             comment.parent_post = post
             comment.save()
 
-    return redirect('post-page', post.id)
+    context = {
+        'post' : post,
+        'comment': comment,
+        'replyform': replyform
+    }
+
+    return render(request, 'snippets/add_comment.html', context)
             
 
 @login_required
@@ -142,6 +145,7 @@ def comment_delete_view(request, pk):
 @login_required
 def reply_sent(request, pk):
     comment = get_object_or_404(Comment, id=pk)
+    replyform = ReplyCreateForm()
 
     if request.method == 'POST':
         form = ReplyCreateForm(request.POST)
@@ -151,7 +155,13 @@ def reply_sent(request, pk):
             reply.parent_comment = comment
             reply.save()
 
-    return redirect('post-page', comment.parent_post.id)
+    context = {
+        'comment': comment,
+        'reply' : reply,
+        'replyform': replyform
+    }
+    return render(request, 'snippets/add_reply.html', context)
+
             
 
 @login_required
@@ -173,7 +183,7 @@ def like_toggle(model):
             # we pass in teh model (eg. Post, Comment or Reply) and get the id from the kwargs
             # we use psot as our variable (could also have been osmething else like model_var or comment)
             post = get_object_or_404(model, id=kwargs.get('pk'))
-
+            print(post)
             # check if the user already liked the post
             user_exists = post.likes.filter(username=request.user.username).exists()
 
@@ -182,16 +192,17 @@ def like_toggle(model):
                     post.likes.remove(request.user)
                 else:
                     post.likes.add(request.user)
-            return func(request, *args, **kwargs)
+            return func(request, post)
         return wrapper
     return inner_func
 
 
 @login_required
 @like_toggle(Post)
-def like_post(request, post):
-    return render(request, 'snippets/likes.html', {'post': post})
-    
+def like_post(request, post):   
+    return render(request, 'snippets/likes.html', {'post' : post })
+
+
 @login_required
 @like_toggle(Comment)
 def like_comment(request, post):

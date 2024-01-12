@@ -27,11 +27,13 @@
                 <a href="{% url 'category' tag.slug %}" class="bg-gray-200 rounded-full px-3 py-1 hover:bg-gray-800 hover:text-white">{{tag.name}}</a>
             {% endfor %}
             </div>
+
+       
         <div class="flex items-center justify-between text-sm px-2">
             <a class="font-bold hover:underline" href="{% url 'post-page' post.id %}">
                 {% if post.comments.count %}
                     Comments
-                    <span class="font-light text-gray-500 ml-1">{{post.comments.count}}</span>
+                    <span id="commentscount-{{post.id}}" class="font-light text-gray-500 ml-1">{{post.comments.count}}</span>
                 {% else %}
                     {% if user.is_authenticated %}
                         Add comment
