@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import HttpResponse
@@ -99,22 +100,15 @@ def post_page_view(request, pk):
     commentform = CommentCreateForm()
     replyform = ReplyCreateForm()
     
-
-    # if request.htmx:
-    #     if 'top' in request.GET:
-    #         pass
-    #         comments = post.comments.annotate(num_likes=Count('likes')).filter(num_likes__gt=0).order_by('-num_likes')
-
-    #     else:
-    #         comments = post.comments.all()
-            
-    #     return render(request, 'snippets/loop_postpage_comments.html', {'comments': comments, 'replyform': replyform})
-    
-
     if request.htmx:
         # check if top is part of the url
         if 'top' in request.GET:
-            comments = post.comments.filter(likes__isnull=False)
+            # comments = post.comments.filter(likes__isnull=False).distinct()
+            
+            # annotate(num_likes=Count('likes')) -> counts all the likes and stores them in the variable num_likes
+            # .filter(num_likes__gt=0) -> filters if the numk_likes is greater than 0 (gt0)
+            print("TESTTEST")
+            comments = post.comments.annotate(num_likes=Count('likes')).filter(num_likes__gt=0).order_by('-num_likes')
         else:
             comments = post.comments.all()
         return render(request, 'snippets/loop_postpage_comments.html', {'comments': comments, 'replyform': replyform})

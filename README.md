@@ -77,3 +77,9 @@ The project includes:
 # Newest posts and Top posts functionality
 * use "?" selector in url
 * use django_htmx package (https://django-htmx.readthedocs.io/en/latest/)
+* use the annotate method to generate sql code for us to make calculations in the database. This is faster than in django... 
+* use a database function (count) and store the value in a variable (num_likes) to show the comment with the most likes on top.
+
+# Sidebar
+* load the sidebar with a custom template tag. 
+* Key concepts: custom template tag, inclusion_tag(), pluralize, truncatechars
