@@ -98,4 +98,4 @@ class LikedReply(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.user.username} : {self.comment.body[:30]}'
+        return f'{self.user.username} : {self.reply.body[:30]}'

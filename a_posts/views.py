@@ -166,50 +166,70 @@ def reply_delete_view(request, pk):
     return render(request, "a_posts/reply_delete.html", {'reply' : reply})
 
 
+# Decorator function that takes the model (eg. Post, Comment or Reply)
+def like_toggle(model):
+    def inner_func(func):
+        def wrapper(request, *args, **kwargs):
+            # we pass in teh model (eg. Post, Comment or Reply) and get the id from the kwargs
+            # we use psot as our variable (could also have been osmething else like model_var or comment)
+            post = get_object_or_404(model, id=kwargs.get('pk'))
+
+            # check if the user already liked the post
+            user_exists = post.likes.filter(username=request.user.username).exists()
+
+            if post.author != request.user:
+                if user_exists:
+                    post.likes.remove(request.user)
+                else:
+                    post.likes.add(request.user)
+            return func(request, *args, **kwargs)
+        return wrapper
+    return inner_func
+
+
 @login_required
-def like_post(request, pk):
-    post = get_object_or_404(Post, id=pk)
-
-    # check if the user already liked the post
-    user_exists = post.likes.filter(username=request.user.username).exists()
-
-    if post.author != request.user:
-        if user_exists:
-            post.likes.remove(request.user)
-        else:
-            post.likes.add(request.user)
-        
-        return render(request, 'snippets/likes.html', {'post': post})
+@like_toggle(Post)
+def like_post(request, post):
+    return render(request, 'snippets/likes.html', {'post': post})
     
+@login_required
+@like_toggle(Comment)
+def like_comment(request, post):
+    return render(request, 'snippets/likes_comment.html', {'post': post})
 
 @login_required
-def like_comment(request, pk):
-    comment = get_object_or_404(Comment, id=pk)
+@like_toggle(Reply)
+def like_reply(request, post):
+    return render(request, 'snippets/likes_reply.html', {'post': post})
 
-    # check if the user already liked the post
-    user_exists = comment.likes.filter(username=request.user.username).exists()
+# @login_required
+# def like_comment(request, pk):
+#     comment = get_object_or_404(Comment, id=pk)
 
-    if comment.author != request.user:
-        if user_exists:
-            comment.likes.remove(request.user)
-        else:
-            comment.likes.add(request.user)
+#     # check if the user already liked the post
+#     user_exists = comment.likes.filter(username=request.user.username).exists()
+
+#     if comment.author != request.user:
+#         if user_exists:
+#             comment.likes.remove(request.user)
+#         else:
+#             comment.likes.add(request.user)
         
-        return render(request, 'snippets/likes_comment.html', {'comment': comment})
+#         return render(request, 'snippets/likes_comment.html', {'comment': comment})
 
 
-@login_required
-def like_reply(request, pk):
-    reply = get_object_or_404(Reply, id=pk)
+# @login_required
+# def like_reply(request, pk):
+#     reply = get_object_or_404(Reply, id=pk)
 
-    # check if the user already liked the post
-    user_exists = reply.likes.filter(username=request.user.username).exists()
+#     # check if the user already liked the post
+#     user_exists = reply.likes.filter(username=request.user.username).exists()
 
-    if reply.author != request.user:
-        if user_exists:
-            reply.likes.remove(request.user)
-        else:
-            reply.likes.add(request.user)
+#     if reply.author != request.user:
+#         if user_exists:
+#             reply.likes.remove(request.user)
+#         else:
+#             reply.likes.add(request.user)
         
-        return render(request, 'snippets/likes_reply.html', {'reply': reply})
+#         return render(request, 'snippets/likes_reply.html', {'reply': reply})
     

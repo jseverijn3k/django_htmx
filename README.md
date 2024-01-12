@@ -63,7 +63,8 @@ The project includes:
 * a user can not like his own posts
 * a template snippet is made for the likes
 * htmx is used to swap the the likes snippet when a user clicks (likes)
-* likes on comments and replies
+* likes on comments
+* Likes on replies (to comments)
 * use a custom decorator to avoid duplicating code for the like functionality
 * 
 
