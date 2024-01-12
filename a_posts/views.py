@@ -99,6 +99,26 @@ def post_page_view(request, pk):
     commentform = CommentCreateForm()
     replyform = ReplyCreateForm()
     
+
+    # if request.htmx:
+    #     if 'top' in request.GET:
+    #         pass
+    #         comments = post.comments.annotate(num_likes=Count('likes')).filter(num_likes__gt=0).order_by('-num_likes')
+
+    #     else:
+    #         comments = post.comments.all()
+            
+    #     return render(request, 'snippets/loop_postpage_comments.html', {'comments': comments, 'replyform': replyform})
+    
+
+    if request.htmx:
+        # check if top is part of the url
+        if 'top' in request.GET:
+            comments = post.comments.filter(likes__isnull=False)
+        else:
+            comments = post.comments.all()
+        return render(request, 'snippets/loop_postpage_comments.html', {'comments': comments, 'replyform': replyform})
+    
     context = {
         'post' : post,
         'commentform' : commentform,

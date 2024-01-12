@@ -76,4 +76,4 @@ The project includes:
 
 # Newest posts and Top posts functionality
 * use "?" selector in url
-* use django htmx
+* use django_htmx package (https://django-htmx.readthedocs.io/en/latest/)
