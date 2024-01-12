@@ -166,6 +166,7 @@ def reply_delete_view(request, pk):
     return render(request, "a_posts/reply_delete.html", {'reply' : reply})
 
 
+@login_required
 def like_post(request, pk):
     post = get_object_or_404(Post, id=pk)
 
@@ -179,3 +180,36 @@ def like_post(request, pk):
             post.likes.add(request.user)
         
         return render(request, 'snippets/likes.html', {'post': post})
+    
+
+@login_required
+def like_comment(request, pk):
+    comment = get_object_or_404(Comment, id=pk)
+
+    # check if the user already liked the post
+    user_exists = comment.likes.filter(username=request.user.username).exists()
+
+    if comment.author != request.user:
+        if user_exists:
+            comment.likes.remove(request.user)
+        else:
+            comment.likes.add(request.user)
+        
+        return render(request, 'snippets/likes_comment.html', {'comment': comment})
+
+
+@login_required
+def like_reply(request, pk):
+    reply = get_object_or_404(Reply, id=pk)
+
+    # check if the user already liked the post
+    user_exists = reply.likes.filter(username=request.user.username).exists()
+
+    if reply.author != request.user:
+        if user_exists:
+            reply.likes.remove(request.user)
+        else:
+            reply.likes.add(request.user)
+        
+        return render(request, 'snippets/likes_reply.html', {'reply': reply})
+    

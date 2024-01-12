@@ -27,7 +27,8 @@
                         1
                     </div>
                     {% if user.is_authenticated and reply.author == user %}
-                        <a href="">Like</a>
+                        {% comment %} <a href="">Like</a> {% endcomment %}
+                        {% include 'snippets/likes_reply.html' %}
                         <a href="{% url 'reply-delete' reply.id %}">Delete</a>
                     {% endif %}
                 </div>
