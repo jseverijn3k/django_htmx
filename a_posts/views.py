@@ -195,12 +195,12 @@ def like_post(request, post):
 @login_required
 @like_toggle(Comment)
 def like_comment(request, post):
-    return render(request, 'snippets/likes_comment.html', {'post': post})
+    return render(request, 'snippets/likes_comment.html', {'comment': post})
 
 @login_required
 @like_toggle(Reply)
 def like_reply(request, post):
-    return render(request, 'snippets/likes_reply.html', {'post': post})
+    return render(request, 'snippets/likes_reply.html', {'reply': post})
 
 # @login_required
 # def like_comment(request, pk):
