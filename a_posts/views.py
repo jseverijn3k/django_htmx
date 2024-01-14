@@ -20,7 +20,6 @@ def home_view(request, tag=None):
     
     context = {
         'posts' : posts,
-        'categories' : Tag.objects.all(),
         'tag' : tag,
     }
 
@@ -192,6 +191,30 @@ def reply_delete_view(request, pk):
 
 # Decorator function that takes the model (eg. Post, Comment or Reply)
 def like_toggle(model):
+    """
+    Decorator for handling like toggling functionality on models (e.g., Post, Comment, or Reply).
+
+    This decorator takes a model as an argument and returns a function that can be used to toggle
+    likes on instances of that model. The decorated function is expected to handle the request and
+    the model instance.
+
+    Parameters:
+        model (django.db.models.Model): The model on which likes are toggled.
+
+    Usage:
+    @like_toggle(Post)  # Apply the decorator to a view function handling likes on Post instances
+    def post_like_toggle_view(request, post):
+        # Your view logic here
+
+    The decorated function should handle the request and the model instance, and the like
+    toggling logic is implemented within the decorator.
+
+    Example:
+    @like_toggle(Post)
+    def post_like_toggle_view(request, post):
+        # Your view logic here
+    """
+    
     def inner_func(func):
         def wrapper(request, *args, **kwargs):
             # we pass in teh model (eg. Post, Comment or Reply) and get the id from the kwargs
