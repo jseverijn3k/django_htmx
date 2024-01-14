@@ -81,5 +81,6 @@ The project includes:
 * use a database function (count) and store the value in a variable (num_likes) to show the comment with the most likes on top.
 
 # Sidebar
+* with categories, top posts and top comments
 * load the sidebar with a custom template tag. 
 * Key concepts: custom template tag, inclusion_tag(), pluralize, truncatechars
