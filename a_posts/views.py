@@ -1,6 +1,7 @@
 from django.db.models import Count
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
@@ -18,11 +19,25 @@ def home_view(request, tag=None):
     else:     
         posts=  Post.objects.all()
     
+    # instantiate the Paginator oobject with 3 posts per page
+    paginator = Paginator(posts, 3)
+    # get the page to display from the request object with a defaul of 1
+    page = int(request.GET.get('page',1))
+    # give back the correct page and return a blank page when there are no more pages
+    try:
+        posts = paginator.page(page) 
+    except:
+        return HttpResponse('')
+
+
     context = {
         'posts' : posts,
         'tag' : tag,
+        'page' : page,
     }
 
+    if request.htmx:
+        return render(request, 'snippets/loop_home_posts.html', context)
     return render(request, "a_posts/home.html", context)
  
 
@@ -214,7 +229,7 @@ def like_toggle(model):
     def post_like_toggle_view(request, post):
         # Your view logic here
     """
-    
+
     def inner_func(func):
         def wrapper(request, *args, **kwargs):
             # we pass in teh model (eg. Post, Comment or Reply) and get the id from the kwargs
