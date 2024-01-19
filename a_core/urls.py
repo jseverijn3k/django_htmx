@@ -19,12 +19,16 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from a_inbox.views import *
 from a_posts.views import *
 from a_users.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
+
+    # a_inbox urls
+    path('inbox/', include('a_inbox.urls')),
 
     # a_posts urls
     path('', home_view, name='home'),

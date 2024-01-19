@@ -21,7 +21,8 @@ The project includes:
 * get images, artist name and artist url from Flickr
 * use the BeautifulSoup package to build the webcrawler
 
-## Messages (using Django messages) 
+## Messages (using Django messages)
+
 * to show if an action was succesfull
   * Create / Update / Delete of a post
   * Delete of a comment
@@ -29,7 +30,7 @@ The project includes:
 
 ## Categories and Tag -> in Post app
 
-* to tag our posts with a certain category 
+* to tag our posts with a certain category
 * using a many-to-many relationship between post and tags
 * category filtering -> showing only the posts belonging to a certain category
 * use category images
@@ -105,7 +106,12 @@ The project includes:
 
 ## Inbox
 
-* users can send messages to each otehr using an inbox functionality
+* users can send (private) messages to each otehr using an inbox functionality
+* users can send a mesage from the profiel page and the inbox
+* users get a notification alert to see when they have new messages
+* encryption of messages (also for admins) so the messages stay truly private
+* make the messages immutable on the admin people so they cannot be changes there
+* build as a standalone component 9meaning all files (also the template files) are in this folder
 
 ## Summary
 

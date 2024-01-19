@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     # Myapps
     'a_posts',
     'a_users',
+    'a_inbox',
 ]
 
 MIDDLEWARE = [
@@ -166,4 +167,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 
-ACCOUNT_USERNNAME_BLACKLIST = ['admin', 'superuser', 'administrator', 'root', 'sysadmin', 'system', 'accounts', 'profile', 'category', 'post']
+ACCOUNT_USERNNAME_BLACKLIST = ['admin', 'superuser', 'administrator', 'root', 'sysadmin', 'system', 'accounts', 'profile', 'category', 'post', 'inbox']
