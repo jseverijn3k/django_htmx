@@ -108,6 +108,7 @@ The project includes:
 
 * users can send (private) messages to each otehr using an inbox functionality
 * users can send a mesage from the profiel page and the inbox
+* each message is part of a conversation
 * users get a notification alert to see when they have new messages
 * encryption of messages (also for admins) so the messages stay truly private
 * make the messages immutable on the admin people so they cannot be changes there
